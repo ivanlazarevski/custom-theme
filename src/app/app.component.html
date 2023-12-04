@@ -1,0 +1,113 @@
+<div class="container mx-auto">
+  <mat-toolbar color="primary" style="color: #f5f5f5">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Merkursports</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-card class="example-card merkur-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz
+        breeds of dog from Japan. A small, agile dog that copes very well with
+        mountainous terrain, the Shiba Inu was originally bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        [matBadge]="badgeValue"
+        matBadgePosition="after"
+        matBadgeColor="warn"
+        class="mr-4 merkur-btn"
+        matBadgeSize="medium"
+        [matBadgeHidden]="!displayBadge"
+      >
+        Like
+      </button>
+      <button
+        mat-flat-button
+        class="merkur-btn"
+        color="accent"
+        style="width: 50%"
+      >
+        Deposit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="p-2 w-1/2 my-4 merkur-card">
+    <mat-chip-listbox aria-label="Fish selection" class="p-2">
+      <mat-chip-option color="accent">One fish</mat-chip-option>
+      <mat-chip-option color="accent">Two fish</mat-chip-option>
+      <mat-chip-option color="accent" selected>Accent fish</mat-chip-option>
+      <mat-chip-option color="warn">Warn fish</mat-chip-option>
+    </mat-chip-listbox>
+    <div class="checkboxes flex flex-col">
+      <mat-checkbox color="primary">Subscribe to our newsletter</mat-checkbox>
+      <mat-checkbox color="accent"
+        >I have read and understood the terms and conditions.</mat-checkbox
+      >
+    </div>
+    <button
+      mat-flat-button
+      color="primary"
+      class="merkur-btn"
+      [matTooltip]="tooltipMessage"
+      matTooltipClass="merkur-tooltip"
+      matTooltipPosition="above"
+    >
+      Register (With tooltip)
+    </button>
+    <button
+      mat-flat-button
+      color="accent"
+      class="merkur-btn mt-2"
+      (click)="displayProductInDialog()"
+    >
+      See Dialog
+    </button>
+  </mat-card>
+
+  <!-- Presentation Example -->
+  <div class="bg-merkurPrimary-100 p-4">
+    <h1 class="text-xl font-bold">Live</h1>
+    <mat-card class="merkur-card-white p-4">
+      <merkur-game *ngFor="let item of gameList"></merkur-game>
+    </mat-card>
+  </div>
+</div>
+
+<p>
+  {{ tooltipMessage | uppercase }}
+</p>

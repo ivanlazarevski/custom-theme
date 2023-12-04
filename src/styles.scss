@@ -1,0 +1,146 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$merkur-primary: (
+  50: #e5e9f0,
+  100: #bdc8da,
+  200: #93a5c1,
+  300: #6a83a9,
+  400: #496998,
+  500: #022652,
+  // Main Color
+  600: #1b4981,
+  700: #114076,
+  800: #083669,
+  900: #022652,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    // ... continues to 900
+  ),
+);
+
+$merkur-secondary: (
+  50: #fff8e0,
+  100: #ffedb0,
+  200: #ffe17c,
+  300: #ffd743,
+  400: #ffcc00,
+  500: #ffcc00,
+  // Main Color
+  600: #ffb500,
+  700: #ffa100,
+  800: #ff8f00,
+  900: #ff6d00,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    // ... continues to 900
+  ),
+);
+
+$custom-theme-primary: mat.define-palette($merkur-primary);
+$custom-theme-accent: mat.define-palette($merkur-secondary);
+
+// The warn palette is optional (defaults to red).
+$custom-theme-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$custom-theme-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-theme-primary,
+      accent: $custom-theme-accent,
+      warn: $custom-theme-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($custom-theme-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif !important;
+}
+
+// Ignore the errors, it works.
+// We could possibly define the color schemes both in material and tailwind? Or just not use tailwind at all.
+// But definitely create classes like this, AND establish dimensional constraints like tailwind.
+.merkur-card {
+  @apply rounded-xl shadow-none bg-merkurPrimary-100 #{!important};
+}
+
+.merkur-card-white {
+  box-shadow: 0px 0px 10px 0px #0000000d !important;
+  @apply rounded-xl #{!important};
+}
+
+.absolute-center {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 #{!important};
+}
+
+.merkur-btn {
+  @apply font-bold text-sm rounded-xl #{!important};
+}
+
+.merkur-tooltip {
+  @apply p-2 bg-merkurPrimary-500 text-white rounded-xl;
+}
+
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  background: transparent !important;
+}
+
+merkur-game {
+  border-bottom: 1px solid #f1f3ff;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+/**
+Angular Material components that we can use out of the box.
+- Badge (Very easy to implement, can customize content,
+  position, color, size)
+- Bottom sheet would be interesting to implement for mobile. (GIMMICK)
+- Card (possibly a wrapper for basic styling)
+- Chips (Able to customize color, content, font properties) (GIMMICK)
+- Dialog (I would consider using this, it's only a wrapper and gives us 
+  easy communication between parent and child)
+- Expansion panel Another wrapper like the bottom sheet. (GIMMICK)
+- Progress bars and spinners are a hassle to implement. I would consider this.
+- Snackbar (Can customize heavily through handsetCssClass, 
+  but how much customization do we need? Can also configure H/V position, duration, 
+  message, add extra classes with panelClass.)
+- Tree (can be used, shown in other project)
+- Tooltip. (Also easy to implement, can pass through message, positions, delay, custom css class and custom touch gesture behavior)
+**/
